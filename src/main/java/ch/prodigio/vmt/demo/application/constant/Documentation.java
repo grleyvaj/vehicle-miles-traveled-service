@@ -45,7 +45,8 @@ public class Documentation {
 
 	public static final String get_vehicle_by_id_op_summary = "Get vehicle by identifier";
 	public static final String get_vehicle_by_id_op_description = "Get vehicle by identifier.";
-	public static final String get_vehicle_by_id_op_resp_description = "Return the vehicle stored by identifier.";
+	public static final String get_vehicle_by_id_op_resp_200_description = "Return the vehicle stored by identifier.";
+	public static final String get_vehicle_by_id_op_resp_404_description = "Resource Not Found.";
 	public static final String get_vehicles_rp_ok_description= "Vehicles found";
 
 

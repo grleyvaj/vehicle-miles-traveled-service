@@ -38,12 +38,15 @@ public class Constants {
      * ExceptionResponseHandler's constants
      **********************/
 
-    public static final String notFound_resp_description = "El recurso solicitado no existe.";
-    public static final String notFound_resp_name = "Devuelve un ErrorInfo al producirse una excepción ResourceNotFoundException debido a que el recurso solicitado no existe.";
+    public static final String notFound_resp_description = "The requested resource does not exist.";
+    public static final String notFound_resp_name = "Returns an ErrorInfo when a ResourceNotFoundException occurs because the requested resource does not exist.";
 
-    public static final String internalError_resp_description = "Error interno del servidor.";
-    public static final String internalError_resp_name = "Devuelve un ErrorInfo al producirse una excepción HttpServerErrorException debido a que se ha producido un error interno en el servidor.";
+    public static final String internalError_resp_description = "Internal server error.";
+    public static final String internalError_resp_name = "Returns an ErrorInfo when an HttpServerErrorException occurs due to an internal error in the server.";
 
-    public static final String incompletePtmError_resp_description = "Ausencia de parámetros que son requeridos para completar la solicitud realizada. Por ejemplo: token, path variables o parámetros de la solicitud.";
-    public static final String incompletePtmError_resp_name = "Devuelve un ErrorInfo al producirse una excepción MissingRequestHeaderException debido a que faltan parámetros que son requeridos para completar la solicitud realizada.";
+    public static final String incompletePtmError_resp_description = "Absence of parameters that are required to complete the request made. For example: token, path variables or request parameters.";
+    public static final String incompletePtmError_resp_name = "Returns an ErrorInfo when a MissingRequestHeaderException occurs due to missing parameters that are required to complete the request made.";
+
+    public static final String csvExceptionError_resp_description = "Error opening or reading the import file.";
+    public static final String csvExceptionError_resp_name = "Returns an ErrorInfo when CsvErrorException occurs due to: Reading CSV Error or Closing fileReader/csvParser Error!.";
 }

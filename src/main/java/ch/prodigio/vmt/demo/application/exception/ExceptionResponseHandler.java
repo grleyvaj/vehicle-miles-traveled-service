@@ -38,6 +38,7 @@ public class ExceptionResponseHandler {
     private static final int ERROR_CODE_ConstraintViolationException_MODEL = 2;
     private static final int ERROR_CODE_InternalError_MODEL = 3;
     private static final int ERROR_CODE_MissingRequestHeaderException = 4;
+    private static final int ERROR_CODE_CSVException = 5;
 
     private final ErrorContentHandler contentHandler;
 
@@ -154,6 +155,34 @@ public class ExceptionResponseHandler {
                 "ConstraintViolationException-javax-validation");
 
         return new ResponseEntity<>(errorInfo, contentHandler.validationInModelAlert(errorMessage), status);
+    }
+
+    /**
+     * Create response to handle an exception thrown by csv exceptions
+     *
+     * @param request ReadingCSVException Information for create a response to this exception
+     * @return ResponseEntity The response created
+     */
+    @ExceptionHandler(CsvErrorException.class)
+    @ApiResponse(responseCode = "400", description = Constants.csvExceptionError_resp_description,
+        content = @Content(
+            mediaType = MediaType.APPLICATION_JSON_VALUE,
+            schema = @Schema(implementation = ErrorInfo.class), examples = {
+            @ExampleObject(name = Constants.csvExceptionError_resp_name, summary = "400 from the service directly")}))
+    public ResponseEntity<ErrorInfo> contentError(HttpServletRequest request, CsvErrorException e) {
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        String errorMessage = e.getMessage();
+        ErrorInfo errorInfo = new ErrorInfo(
+            request.getRequestURI(),
+            request.getMethod(),
+            errorMessage,
+            status.getReasonPhrase(),
+            status.value(),
+            ERROR_CODE_CSVException,
+            "MissingRequestHeaderException");
+
+        return new ResponseEntity<>(errorInfo, contentHandler.notMethodArgumentTypeAlert(errorMessage), status);
     }
 }
 

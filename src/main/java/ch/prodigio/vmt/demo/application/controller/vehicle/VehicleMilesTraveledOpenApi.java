@@ -60,10 +60,9 @@ public interface VehicleMilesTraveledOpenApi {
 		description = Documentation.get_vehicle_by_id_op_description,
 		tags = {"vehicles"})
 	@ApiResponses(value = {
-		@ApiResponse(responseCode = "200", description = Documentation.get_vehicle_by_id_op_resp_description, content = @Content(schema = @Schema(type = "array", implementation = VehicleResponse.class))),
+		@ApiResponse(responseCode = "200", description = Documentation.get_vehicle_by_id_op_resp_200_description, content = @Content(schema = @Schema(type = "object", implementation = VehicleResponse.class))),
+		@ApiResponse(responseCode = "404", description = Documentation.get_vehicle_by_id_op_resp_404_description, content = @Content(schema = @Schema(type = "object", implementation = VehicleResponse.class))),
 	})
-	@ApiResponse(content = @Content(schema = @Schema(implementation = VehicleResponse.class)),
-		responseCode = "200", description = Documentation.get_vehicle_by_id_op_resp_description)
 	public ResponseEntity<?> getVehicleById(
 		@Parameter(description = Documentation.id_description, example = "1", required = true) Long vehicleId
 	);
