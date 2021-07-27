@@ -1,0 +1,264 @@
+{
+	"info": {
+		"_postman_id": "3628ea3b-9c3f-4922-983f-12354e9091e0",
+		"name": "Vehicle Miles Traveled",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Import Vehicles",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Lenovo/Desktop/workspace/vehicle-miles-traveled-service/src/main/resources/04_sample_vmt_county.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/vmt/v1/vehicles/import",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vmt",
+						"v1",
+						"vehicles",
+						"import"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vehicles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/vmt/v1/vehicles?page=0&size=5&sort=id,asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vmt",
+						"v1",
+						"vehicles"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						},
+						{
+							"key": "sort",
+							"value": "id,asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vehicles By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/vmt/v1/vehicles/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vmt",
+						"v1",
+						"vehicles",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vehicles Test Exception",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/vmt/v1/vehicles/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vmt",
+						"v1",
+						"vehicles",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Vehicle",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"county_fips\": 1001,\r\n    \"county_name\": \"Autauga\",\r\n    \"state_name\": \"Alabama\",\r\n    \"date\": \"2020-05-08\",\r\n    \"county_vmt\": 3550000.0,\r\n    \"baseline_jan_vmt\": 3571446.0,\r\n    \"percent_change_from_jan\": -0.6,\r\n    \"mean7_county_vmt\": 2790000.0,\r\n    \"mean7_percent_change_from_jan\": -21.88,\r\n    \"date_at_low\": \"2020-04-12\",\r\n    \"mean7_county_vmt_at_low\": 1542857.14,\r\n    \"percent_change_from_low\": 80.83\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/vmt/v1/vehicles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vmt",
+						"v1",
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Vehicle Test Validation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"county_fips\": 0,\r\n    \"county_name\": \"Autauga\",\r\n    \"state_name\": \"Alabama\",\r\n    \"date\": \"2020-05-089\",\r\n    \"county_vmt\": 3550000.0,\r\n    \"baseline_jan_vmt\": 3571446.0,\r\n    \"percent_change_from_jan\": -0.6,\r\n    \"mean7_county_vmt\": 2790000.0,\r\n    \"mean7_percent_change_from_jan\": -21.88,\r\n    \"date_at_low\": \"2020-04-12\",\r\n    \"mean7_county_vmt_at_low\": 1542857.14,\r\n    \"percent_change_from_low\": 80.83\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/vmt/v1/vehicles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vmt",
+						"v1",
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Vehicle",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"county_fips\": 1001,\r\n    \"county_name\": \"Autauga Up\",\r\n    \"state_name\": \"Alabama Up\",\r\n    \"date\": \"2020-05-09\",\r\n    \"county_vmt\": 3550000.0,\r\n    \"baseline_jan_vmt\": 3571446.0,\r\n    \"percent_change_from_jan\": -0.6,\r\n    \"mean7_county_vmt\": 2790000.0,\r\n    \"mean7_percent_change_from_jan\": -21.88,\r\n    \"date_at_low\": \"2020-04-12\",\r\n    \"mean7_county_vmt_at_low\": 1542857.90,\r\n    \"percent_change_from_low\": 80.90\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/vmt/v1/vehicles/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vmt",
+						"v1",
+						"vehicles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Vehicle Test Exception",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"county_fips\": 1001,\r\n    \"county_name\": \"Autauga Up\",\r\n    \"state_name\": \"Alabama Up\",\r\n    \"date\": \"2020-05-09\",\r\n    \"county_vmt\": 3550000.0,\r\n    \"baseline_jan_vmt\": 3571446.0,\r\n    \"percent_change_from_jan\": -0.6,\r\n    \"mean7_county_vmt\": 2790000.0,\r\n    \"mean7_percent_change_from_jan\": -21.88,\r\n    \"date_at_low\": \"2020-04-12\",\r\n    \"mean7_county_vmt_at_low\": 1542857.90,\r\n    \"percent_change_from_low\": 80.90\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/vmt/v1/vehicles/20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vmt",
+						"v1",
+						"vehicles",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Vehicle",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/vmt/v1/vehicles/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vmt",
+						"v1",
+						"vehicles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
