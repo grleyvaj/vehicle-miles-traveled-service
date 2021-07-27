@@ -11,7 +11,7 @@ class CsvErrorExceptionTest {
 
 	@Test
 	public void when_exception_is_created_then_data_can_be_retrieved() {
-		CsvErrorException actual = new CsvErrorException("::message::");
+		FileCsvErrorException actual = new FileCsvErrorException("::message::");
 
 		assertEquals("::message::", actual.getMessage());
 	}

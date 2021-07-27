@@ -19,4 +19,6 @@ public interface IVehicleRepository {
 	void deleteAll();
 
 	Vehicle update(Vehicle vehicle);
+
+	void deleteById(long vehicleId);
 }

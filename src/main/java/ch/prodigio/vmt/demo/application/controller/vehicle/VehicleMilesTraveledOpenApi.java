@@ -4,7 +4,6 @@ import ch.prodigio.vmt.demo.application.constant.Documentation;
 import ch.prodigio.vmt.demo.application.controller.vehicle._response.VehicleResponse;
 import ch.prodigio.vmt.demo.application.controller.vehicle.create.request.VehicleRequest;
 import ch.prodigio.vmt.demo.application.exception.ErrorInfo;
-import ch.prodigio.vmt.demo.domain.entity.Vehicle;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -13,7 +12,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -34,11 +32,10 @@ public interface VehicleMilesTraveledOpenApi {
 		summary = Documentation.import_vehicles_op_summary,
 		description = Documentation.import_vehicles_op_description,
 		operationId = "importVehicles",
-		security = {@SecurityRequirement(name = "sso_auth", scopes = {"vmt_manage"})},
 		tags = {"vehicles"}
 	)
 	@ApiResponses(value = {
-		@ApiResponse(responseCode = "201", description = Documentation.import_vehicles_rp_ok_description, headers = @Header(name = "app-success", description = Documentation.import_vehicles_head_ok_description)),
+		@ApiResponse(responseCode = "200", description = Documentation.import_vehicles_rp_ok_description),
 		@ApiResponse(responseCode = "400", description = Documentation.import_vehicles_rp_ex_description, content = @Content(schema = @Schema(implementation = ErrorInfo.class))),
 	})
 	public ResponseEntity<?> importVehicles(
@@ -50,7 +47,6 @@ public interface VehicleMilesTraveledOpenApi {
 		summary = Documentation.get_vehicles_op_summary,
 		description = Documentation.get_vehicles_op_description,
 		operationId = "listVehicles",
-		security = {@SecurityRequirement(name = "sso_auth", scopes = {"vmt_manage"})},
 		tags = {"vehicles"}
 	)
 	@ApiResponses(value = {
@@ -81,7 +77,7 @@ public interface VehicleMilesTraveledOpenApi {
 	})
 	public ResponseEntity<?> createVehicle(
 		@Parameter(description = Documentation.createVehicle_ptm_description, required = true)
-		@RequestBody VehicleRequest causeCreateRequest
+		@RequestBody VehicleRequest vehicleRequest
 	);
 
 	@Operation(
@@ -93,10 +89,19 @@ public interface VehicleMilesTraveledOpenApi {
 		@ApiResponse(responseCode = "404", description = Documentation.get_vehicle_by_id_op_resp_404_description, content = @Content(schema = @Schema(type = "object", implementation = VehicleResponse.class))),
 	})
 	public ResponseEntity<?> updateVehicle(
-		@Parameter(description = Documentation.id_description, required = true, example = "1")
-		@PathVariable("vehicle") Vehicle vehicle,
+		@Parameter(description = Documentation.updateVehicle_pt1_description, required = true, example = "1")
+		@PathVariable() long vehicleId,
 		@Parameter(description = Documentation.updateVehicle_pt2_description, required = true)
-		@RequestBody VehicleRequest causeCreateRequest
+		@RequestBody VehicleRequest vehicleRequest
 	);
 
+	@Operation(
+		summary = Documentation.deleteCauseCreateById_op_summary,
+		description = Documentation.deleteCauseCreateById_op_description,
+		tags = {"vehicles"})
+	@ApiResponse(responseCode = "204", description = Documentation.deleteCauseCreateById_resp_description, headers = @Header(name = "app-success", description = Documentation.deleteCauseCreateById_head_description))
+	public ResponseEntity<?> deleteVehicleById(
+		@Parameter(description = Documentation.deleteCauseCreateById_ptm_description, required = true, example = "1")
+		@PathVariable long vehicleId
+	);
 }

@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IVehicleJpaRepository extends PagingAndSortingRepository<Vehicle, Long>,
 	JpaSpecificationExecutor<Vehicle> {
+
+	void deleteById(long vehicleId);
 }

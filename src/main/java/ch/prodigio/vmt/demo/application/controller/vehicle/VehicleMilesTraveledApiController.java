@@ -7,6 +7,7 @@ import ch.prodigio.vmt.demo.application.controller.vehicle.create.request.Vehicl
 import ch.prodigio.vmt.demo.application.controller.vehicle.imports.response.VehicleView;
 import ch.prodigio.vmt.demo.domain.entity.Vehicle;
 import ch.prodigio.vmt.demo.domain.use_case.vehicle.create.VehicleCreateUseCase;
+import ch.prodigio.vmt.demo.domain.use_case.vehicle.delete.VehicleRemoveUseCase;
 import ch.prodigio.vmt.demo.domain.use_case.vehicle.get.VehicleFindUseCase;
 import ch.prodigio.vmt.demo.domain.use_case.vehicle.imports.VehicleImportsUseCase;
 import ch.prodigio.vmt.demo.domain.use_case.vehicle.list.VehicleListUseCase;
@@ -22,7 +23,7 @@ import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +44,6 @@ import java.util.List;
  */
 @RestController
 @RequiredArgsConstructor
-@Validated
 @RequestMapping(path = VehicleMilesTraveledApiController.BASE_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
 public class VehicleMilesTraveledApiController implements VehicleMilesTraveledOpenApi {
 
@@ -56,19 +56,20 @@ public class VehicleMilesTraveledApiController implements VehicleMilesTraveledOp
 	private final VehicleFindUseCase vehicleFindUseCase;
 	private final VehicleCreateUseCase vehicleCreateUseCase;
 	private final VehicleUpdateUseCase vehicleUpdateUseCase;
+	private final VehicleRemoveUseCase vehicleRemoveUseCase;
 	private final Mapper<byte[], List<Vehicle>> vehicleImportMapper;
 	private final Mapper<Vehicle, VehicleView> vehicleViewMapper;
 	private final Mapper<Vehicle, VehicleResponse> vehicleResponseMapper;
 	private final Mapper<VehicleRequest, Vehicle> vehicleRequestMapper;
 	private final Mapper<VehicleRequest, VehicleInput> vehicleInputMapper;
 	private final RepresentationModelAssembler<VehicleResponse, RepresentationModel<VehicleResponse>> vehicleResponseAssembler;
-	private final PagedResourcesAssembler pagedResourcesAssembler;
+	private final PagedResourcesAssembler<VehicleResponse> pagedResourcesAssembler;
 	private final SuccessfulContentHandler contentHandler;
 
 	@Override
 	@PostMapping(path = URI_API + "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<?> importVehicles(@RequestParam("file") MultipartFile files) throws IOException {
-		Iterable<Vehicle> execute = vehicleImportsUseCase.execute(this.vehicleImportMapper.map(files.getBytes()));
+		Iterable<Vehicle> execute = this.vehicleImportsUseCase.execute(this.vehicleImportMapper.map(files.getBytes()));
 		List<VehicleView> vehicleImported = new ArrayList<>();
 		execute.forEach(vehicle -> vehicleImported.add(this.vehicleViewMapper.map(vehicle)));
 		return ResponseEntity.ok(vehicleImported);
@@ -78,7 +79,7 @@ public class VehicleMilesTraveledApiController implements VehicleMilesTraveledOp
 	@GetMapping(path = URI_API)
 	public ResponseEntity<?> listVehicles(Pageable pageable) {
 		Page<VehicleResponse> vehicles = this.vehicleListUseCase.execute(pageable).map(this.vehicleResponseMapper::map);
-		PagedModel<VehicleResponse> collModel = this.pagedResourcesAssembler.toModel(
+		PagedModel<RepresentationModel<VehicleResponse>> collModel = this.pagedResourcesAssembler.toModel(
 			vehicles,
 			this.vehicleResponseAssembler
 		);
@@ -97,32 +98,41 @@ public class VehicleMilesTraveledApiController implements VehicleMilesTraveledOp
 	public ResponseEntity<?> createVehicle(@RequestBody @Valid VehicleRequest vehicleRequest) {
 		Vehicle vehicleNew = this.vehicleRequestMapper.map(vehicleRequest);
 		VehicleResponse vehicleCreated = this.vehicleResponseMapper.map(this.vehicleCreateUseCase.execute(vehicleNew));
-		vehicleResponseAssembler.toModel(vehicleCreated);
-
-		String msg = contentHandler.successCreateAlert(URI_ENTITY + " " + vehicleCreated.getCountyName());
+		this.vehicleResponseAssembler.toModel(vehicleCreated);
 
 		return ResponseEntity
 			.created(vehicleCreated.getRequiredLink(IanaLinkRelations.SELF).toUri())
-			.headers(SuccessfulContentHandler.createHeaders(msg))
+			.headers(SuccessfulContentHandler.createHeaders(this.contentHandler.successCreateAlert(URI_ENTITY + " " + vehicleCreated
+				.getCountyName())))
 			.body(vehicleCreated);
 	}
 
-	@PutMapping(path = URI_API + "/{vehicle}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@Override
+	@PutMapping(path = URI_API + "/{vehicleId}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> updateVehicle(
-		@PathVariable("vehicle") Vehicle vehicle,
+		@PathVariable("vehicleId") long vehicleId,
 		@RequestBody @Valid VehicleRequest vehicleRequest
 	) {
 		VehicleResponse vehicleUpdated = this.vehicleResponseMapper.map(this.vehicleUpdateUseCase.execute(
-			vehicleInputMapper.map(vehicleRequest),
-			vehicle
+			this.vehicleInputMapper.map(vehicleRequest),
+			vehicleId
 		));
-		vehicleResponseAssembler.toModel(vehicleUpdated);
-
-		String msg = contentHandler.successUpdateAlert(URI_ENTITY + " " + vehicleUpdated.getCountyName());
+		this.vehicleResponseAssembler.toModel(vehicleUpdated);
 
 		return ResponseEntity
 			.created(vehicleUpdated.getRequiredLink(IanaLinkRelations.SELF).toUri())
-			.headers(SuccessfulContentHandler.createHeaders(msg))
+			.headers(SuccessfulContentHandler.createHeaders(this.contentHandler.successUpdateAlert(URI_ENTITY + " " + vehicleUpdated
+				.getCountyName())))
 			.body(vehicleUpdated);
+	}
+
+	@Override
+	@DeleteMapping(path = URI_API + "/{vehicleId}")
+	public ResponseEntity<?> deleteVehicleById(@PathVariable long vehicleId) {
+		this.vehicleRemoveUseCase.execute(vehicleId);
+
+		return ResponseEntity.noContent()
+			.headers(SuccessfulContentHandler.createHeaders(this.contentHandler.successDeleteAlert(URI_ENTITY + " " + vehicleId)))
+			.build();
 	}
 }

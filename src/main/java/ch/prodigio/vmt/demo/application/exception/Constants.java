@@ -49,4 +49,7 @@ public class Constants {
 
     public static final String csvExceptionError_resp_description = "Error opening or reading the import file.";
     public static final String csvExceptionError_resp_name = "Returns an ErrorInfo when CsvErrorException occurs due to: Reading CSV Error or Closing fileReader/csvParser Error!.";
+
+    public static final String validationViolation_description = "The resource specified by parameter is invalid.";
+    public static final String validationViolation_resp_name = "Returns an ErrorInfo when a MethodArgumentNotValidshared exception occurs because the entity specified by parameter is invalid.";
 }

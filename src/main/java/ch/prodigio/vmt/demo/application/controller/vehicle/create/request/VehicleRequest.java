@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -57,7 +58,7 @@ public class VehicleRequest implements Serializable {
 
 	@JsonProperty(value = "date_at_low")
 	@NotBlank(message = "{notBlank.dateAtLow}")
-	@Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "{pattern.date}")
+	@Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "{pattern.dateAtLow}")
 	private String dateAtLow;
 
 	@JsonProperty(value = "mean7_county_vmt_at_low")

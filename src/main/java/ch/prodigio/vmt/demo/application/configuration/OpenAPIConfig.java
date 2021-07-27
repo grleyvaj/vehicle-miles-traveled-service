@@ -19,7 +19,7 @@ public class OpenAPIConfig {
 
     public static final Info DEFAULT_API_INFO = new Info()
             .title("Vehicle Miles Traveled")
-            .description("Microservicio que expone un CRUD conectando a una BD en la que se cargan previamente los datos del dataset público \"04_sample_vmt_county\" disponible en: https://data.world/associatedpress/vehicle-miles-traveled")
+            .description("Microservice that exposes a CRUD by connecting to a DB in which the data of the public dataset \"04_sample_vmt_county\" available in: https://data.world/associatedpress/vehicle-miles-traveled")
             .version("1.0")
             .contact(DEFAULT_CONTACT);
 

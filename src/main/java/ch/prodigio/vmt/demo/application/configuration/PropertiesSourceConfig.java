@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySources;
  */
 @Configuration
 @PropertySources({
-        @PropertySource("classpath:notification.properties")
+        @PropertySource("classpath:notification-alert.properties")
 })
 public class PropertiesSourceConfig {
 }

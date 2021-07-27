@@ -14,34 +14,39 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class VehicleJpaRepositoryImpl implements IVehicleRepository {
 
-	private final IVehicleJpaRepository repository;
+	private final IVehicleJpaRepository jpaRepository;
 
 	@Override
 	public Vehicle create(Vehicle vehicle) {
-		return repository.save(vehicle);
+		return jpaRepository.save(vehicle);
 	}
 
 	@Override
 	public Page<Vehicle> find(Pageable pageable) {
-		return repository.findAll(pageable);
+		return jpaRepository.findAll(pageable);
 	}
 
 	@Override
 	public Optional<Vehicle> findById(long vehicleId) {
-		return repository.findById(vehicleId);
+		return jpaRepository.findById(vehicleId);
 	}
 
 	public Iterable<Vehicle> findAll() {
-		return repository.findAll();
+		return jpaRepository.findAll();
 	}
 
 	@Override
 	public void deleteAll() {
-		repository.deleteAll();
+		jpaRepository.deleteAll();
 	}
 
 	@Override
 	public Vehicle update(Vehicle vehicle) {
-		return repository.save(vehicle);
+		return jpaRepository.save(vehicle);
+	}
+
+	@Override
+	public void deleteById(long vehicleId) {
+		jpaRepository.deleteById(vehicleId);
 	}
 }

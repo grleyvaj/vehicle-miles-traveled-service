@@ -8,12 +8,12 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class CsvErrorException extends RuntimeException {
+public class FileCsvErrorException extends RuntimeException {
 
 	private static final long serialVersionUID = 6019553804512089739L;
 	private String message;
 
-	public CsvErrorException(String message) {
+	public FileCsvErrorException(String message) {
 		super(message);
 		this.message = message;
 	}

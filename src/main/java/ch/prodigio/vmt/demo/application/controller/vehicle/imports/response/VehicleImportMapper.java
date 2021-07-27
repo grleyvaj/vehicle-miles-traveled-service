@@ -1,7 +1,7 @@
 package ch.prodigio.vmt.demo.application.controller.vehicle.imports.response;
 
 import ch.prodigio.vmt.demo.application.contract.Mapper;
-import ch.prodigio.vmt.demo.application.exception.CsvErrorException;
+import ch.prodigio.vmt.demo.application.exception.FileCsvErrorException;
 import ch.prodigio.vmt.demo.domain.entity.Vehicle;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -52,13 +52,13 @@ public class VehicleImportMapper implements Mapper<byte[], List<Vehicle>> {
 				vehicleList.add(vehicle);
 			}
 		} catch(Exception e) {
-			throw new CsvErrorException("Reading CSV Error!");
+			throw new FileCsvErrorException("Reading CSV Error!");
 		} finally {
 			try {
 				fileReader.close();
 				csvParser.close();
 			} catch(IOException e) {
-				throw new CsvErrorException("Closing fileReader/csvParser Error!");
+				throw new FileCsvErrorException("Closing fileReader/csvParser Error!");
 			}
 		}
 		return vehicleList;
