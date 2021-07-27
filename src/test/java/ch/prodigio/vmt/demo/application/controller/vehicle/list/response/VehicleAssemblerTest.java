@@ -1,7 +1,6 @@
 package ch.prodigio.vmt.demo.application.controller.vehicle.list.response;
 
-import ch.prodigio.vmt.demo.application.controller._response.VehicleResponse;
-import ch.prodigio.vmt.demo.application.controller.vehicle.list.response.VehicleAssembler;
+import ch.prodigio.vmt.demo.application.controller.vehicle._response.VehicleResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

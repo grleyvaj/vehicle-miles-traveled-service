@@ -30,4 +30,18 @@ public class VehicleJpaRepositoryImpl implements IVehicleRepository {
 	public Optional<Vehicle> findById(long vehicleId) {
 		return repository.findById(vehicleId);
 	}
+
+	public Iterable<Vehicle> findAll() {
+		return repository.findAll();
+	}
+
+	@Override
+	public void deleteAll() {
+		repository.deleteAll();
+	}
+
+	@Override
+	public Vehicle update(Vehicle vehicle) {
+		return repository.save(vehicle);
+	}
 }

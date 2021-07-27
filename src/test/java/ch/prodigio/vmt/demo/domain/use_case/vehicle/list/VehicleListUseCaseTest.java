@@ -1,9 +1,10 @@
-package ch.prodigio.vmt.demo.domain.use_case.vehicle;
+package ch.prodigio.vmt.demo.domain.use_case.vehicle.list;
 
 import ch.prodigio.vmt.demo.application.builder.PageBuilder;
 import ch.prodigio.vmt.demo.domain.entity.Vehicle;
 import ch.prodigio.vmt.demo.domain.entity.VehicleBuilder;
 import ch.prodigio.vmt.demo.domain.repository.IVehicleRepository;
+import ch.prodigio.vmt.demo.domain.use_case.vehicle.list.VehicleListUseCase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

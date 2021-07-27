@@ -10,11 +10,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class CsvErrorException extends RuntimeException {
 
-    private static final long serialVersionUID = 6019553804512089739L;
-    private String message;
+	private static final long serialVersionUID = 6019553804512089739L;
+	private String message;
 
-    public CsvErrorException(String message) {
-        super(String.format("CSVException.%s.%s.%s", message));
-        this.message = message;
-    }
+	public CsvErrorException(String message) {
+		super(message);
+		this.message = message;
+	}
 }

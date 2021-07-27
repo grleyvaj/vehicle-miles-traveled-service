@@ -1,6 +1,6 @@
 package ch.prodigio.vmt.demo.application.bean;
 
-import ch.prodigio.vmt.demo.application.controller._response.VehicleResponse;
+import ch.prodigio.vmt.demo.application.controller.vehicle._response.VehicleResponse;
 import ch.prodigio.vmt.demo.application.controller.vehicle.list.response.VehicleAssembler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

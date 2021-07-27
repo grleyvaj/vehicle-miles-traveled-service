@@ -13,4 +13,10 @@ public interface IVehicleRepository {
 	Page<Vehicle> find(Pageable pageable);
 
 	Optional<Vehicle> findById(long vehicleId);
+
+	Iterable<Vehicle> findAll();
+
+	void deleteAll();
+
+	Vehicle update(Vehicle vehicle);
 }

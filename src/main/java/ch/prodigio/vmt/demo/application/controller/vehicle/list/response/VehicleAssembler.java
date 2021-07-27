@@ -1,6 +1,6 @@
 package ch.prodigio.vmt.demo.application.controller.vehicle.list.response;
 
-import ch.prodigio.vmt.demo.application.controller._response.VehicleResponse;
+import ch.prodigio.vmt.demo.application.controller.vehicle._response.VehicleResponse;
 import ch.prodigio.vmt.demo.application.controller.vehicle.VehicleMilesTraveledApiController;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;

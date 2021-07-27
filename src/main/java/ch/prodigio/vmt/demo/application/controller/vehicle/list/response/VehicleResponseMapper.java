@@ -1,7 +1,7 @@
 package ch.prodigio.vmt.demo.application.controller.vehicle.list.response;
 
 import ch.prodigio.vmt.demo.application.contract.Mapper;
-import ch.prodigio.vmt.demo.application.controller._response.VehicleResponse;
+import ch.prodigio.vmt.demo.application.controller.vehicle._response.VehicleResponse;
 import ch.prodigio.vmt.demo.domain.entity.Vehicle;
 
 public class VehicleResponseMapper implements Mapper<Vehicle, VehicleResponse> {

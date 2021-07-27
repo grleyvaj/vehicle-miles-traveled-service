@@ -1,9 +1,11 @@
 package ch.prodigio.vmt.demo.application.bean;
 
 import ch.prodigio.vmt.demo.domain.repository.IVehicleRepository;
-import ch.prodigio.vmt.demo.domain.use_case.vehicle.VehicleFindUseCase;
-import ch.prodigio.vmt.demo.domain.use_case.vehicle.VehicleImportsUseCase;
-import ch.prodigio.vmt.demo.domain.use_case.vehicle.VehicleListUseCase;
+import ch.prodigio.vmt.demo.domain.use_case.vehicle.create.VehicleCreateUseCase;
+import ch.prodigio.vmt.demo.domain.use_case.vehicle.get.VehicleFindUseCase;
+import ch.prodigio.vmt.demo.domain.use_case.vehicle.imports.VehicleImportsUseCase;
+import ch.prodigio.vmt.demo.domain.use_case.vehicle.list.VehicleListUseCase;
+import ch.prodigio.vmt.demo.domain.use_case.vehicle.update.VehicleUpdateUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,5 +25,15 @@ public class UseCase {
 	@Bean
 	public VehicleFindUseCase vehicleFindUseCase(IVehicleRepository vehicleRepository) {
 		return new VehicleFindUseCase(vehicleRepository);
+	}
+
+	@Bean
+	public VehicleCreateUseCase vehicleCreateUseCase(IVehicleRepository vehicleRepository) {
+		return new VehicleCreateUseCase(vehicleRepository);
+	}
+
+	@Bean
+	public VehicleUpdateUseCase vehicleUpdateUseCase(IVehicleRepository vehicleRepository) {
+		return new VehicleUpdateUseCase(vehicleRepository);
 	}
 }

@@ -49,11 +49,25 @@ public class Documentation {
 	public static final String get_vehicle_by_id_op_resp_404_description = "Resource Not Found.";
 	public static final String get_vehicles_rp_ok_description= "Vehicles found";
 
+	public static final String createVehicle_op_summary = "Add a vehicle";
+	public static final String createVehicle_op_description = "Add a vehicle with the information provided in VehicleRequest.";
+	public static final String createVehicle_head_description = "Causa de creación registrada satisfactoriamente";
+	public static final String createVehicle_resp_description = "Returns a VehicleResponse resource with the vehicle information created and its corresponding links successfully.";
+	public static final String createVehicle_ptm_description = "Parameter that indicates the CauseCreateRequest with the information of the cause to be added.";
+
+	public static final String updateVehicle_op_summary = "Update vehicle";
+	public static final String updateVehicle_op_description = "Update the vehicle corresponding to the specified identifier with the information provided in VehicleRequest.";
+	public static final String updateVehicle_head_description = "Vehicle successfully updated";
+	public static final String updateVehicle_resp_description = "Returns a VehilceResponse resource with updated information and corresponding links in a satisfactory manner.";
+	public static final String updateVehicle_pt1_description = "Parámetro que indica el identificador del vehículo que desea actualizar.";
+	public static final String updateVehicle_pt2_description = "Parámetro que indica  la CauseCreateRequest con la información de la causa que desea actualizar.";
+
 
 	/********************************************************************
 	 * VehicleRequest's Constants and VehicleResponse's Constants
 	 ********************************************************************/
 	public static final String vehicleRq_schema_description = "Resource with vehicle input data";
 	public static final String vehicleRp_schema_description = "Resource with vehicle response data";
+	public static final String vehicleRpView_schema_description = "Resource with vehicle response data";
 
 }

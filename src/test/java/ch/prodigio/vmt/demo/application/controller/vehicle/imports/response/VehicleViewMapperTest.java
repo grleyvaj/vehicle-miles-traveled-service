@@ -1,6 +1,5 @@
-package ch.prodigio.vmt.demo.application.controller.vehicle.list.response;
+package ch.prodigio.vmt.demo.application.controller.vehicle.imports.response;
 
-import ch.prodigio.vmt.demo.application.controller.vehicle._response.VehicleResponse;
 import ch.prodigio.vmt.demo.domain.entity.Vehicle;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,14 +11,14 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-class VehicleResponseMapperTest {
+class VehicleViewMapperTest {
 
 	@InjectMocks
-	private VehicleResponseMapper mapper;
+	private VehicleViewMapper mapper;
 
 	@Test
 	public void when_mapper_is_used_then_response_is_mapped() {
-		VehicleResponse actual = this.mapper.map(
+		VehicleView actual = this.mapper.map(
 			new Vehicle()
 				.setId(1L)
 				.setCountyFips(1001)
@@ -36,20 +35,12 @@ class VehicleResponseMapperTest {
 				.setPercentChangeFromLow(80.83));
 
 
-		assertEquals((new VehicleResponse()
+		assertEquals((new VehicleView()
 			.setId(1L)
 			.setCountyFips(1001)
 			.setCountyName("Autauga")
 			.setStateName("Alabama")
 			.setDate("2020-05-08")
-			.setCountyVmt(3550000.0)
-			.setBaselineVmt(3571446.0)
-			.setPercentChange(-0.6)
-			.setMeanCountyVmt(2790000.0)
-			.setMeanPercentChange(-21.88)
-			.setDateAtLow("2020-04-12")
-			.setMeanCountyVmtAtLow(1542857.14)
-			.setPercentChangeFromLow(80.83)), actual);
+		), actual);
 	}
-
 }

@@ -1,8 +1,10 @@
 package ch.prodigio.vmt.demo.application.controller.vehicle;
 
 import ch.prodigio.vmt.demo.application.constant.Documentation;
-import ch.prodigio.vmt.demo.application.controller._response.VehicleResponse;
+import ch.prodigio.vmt.demo.application.controller.vehicle._response.VehicleResponse;
+import ch.prodigio.vmt.demo.application.controller.vehicle.create.request.VehicleRequest;
 import ch.prodigio.vmt.demo.application.exception.ErrorInfo;
+import ch.prodigio.vmt.demo.domain.entity.Vehicle;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -15,6 +17,8 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -56,7 +60,8 @@ public interface VehicleMilesTraveledOpenApi {
 		@Parameter(in = ParameterIn.QUERY, description = Documentation.pageable_description, example = Documentation.pageable_request, required = false) Pageable pageable
 	);
 
-	@Operation(summary = Documentation.get_vehicle_by_id_op_summary,
+	@Operation(
+		summary = Documentation.get_vehicle_by_id_op_summary,
 		description = Documentation.get_vehicle_by_id_op_description,
 		tags = {"vehicles"})
 	@ApiResponses(value = {
@@ -64,6 +69,34 @@ public interface VehicleMilesTraveledOpenApi {
 		@ApiResponse(responseCode = "404", description = Documentation.get_vehicle_by_id_op_resp_404_description, content = @Content(schema = @Schema(type = "object", implementation = VehicleResponse.class))),
 	})
 	public ResponseEntity<?> getVehicleById(
-		@Parameter(description = Documentation.id_description, example = "1", required = true) Long vehicleId
+		@Parameter(description = Documentation.id_description, example = "1", required = true) @PathVariable long vehicleId
 	);
+
+	@Operation(
+		summary = Documentation.createVehicle_op_summary,
+		description = Documentation.createVehicle_op_description,
+		tags = {"vehicles"})
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "201", description = Documentation.createVehicle_resp_description, headers = @Header(name = "app-success", description = Documentation.createVehicle_head_description), content = @Content(schema = @Schema(type = "object", implementation = VehicleResponse.class)))
+	})
+	public ResponseEntity<?> createVehicle(
+		@Parameter(description = Documentation.createVehicle_ptm_description, required = true)
+		@RequestBody VehicleRequest causeCreateRequest
+	);
+
+	@Operation(
+		summary = Documentation.updateVehicle_op_summary,
+		description = Documentation.updateVehicle_op_description,
+		tags = {"vehicles"})
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = Documentation.updateVehicle_resp_description, headers = @Header(name = "app-success", description = Documentation.updateVehicle_head_description), content = @Content(schema = @Schema(type = "object", implementation = VehicleResponse.class))),
+		@ApiResponse(responseCode = "404", description = Documentation.get_vehicle_by_id_op_resp_404_description, content = @Content(schema = @Schema(type = "object", implementation = VehicleResponse.class))),
+	})
+	public ResponseEntity<?> updateVehicle(
+		@Parameter(description = Documentation.id_description, required = true, example = "1")
+		@PathVariable("vehicle") Vehicle vehicle,
+		@Parameter(description = Documentation.updateVehicle_pt2_description, required = true)
+		@RequestBody VehicleRequest causeCreateRequest
+	);
+
 }

@@ -1,6 +1,6 @@
-package ch.prodigio.vmt.demo.application.controller._request;
+package ch.prodigio.vmt.demo.application.controller.vehicle.create.request;
 
-import ch.prodigio.vmt.demo.application.controller._request.VehicleRequest;
+import ch.prodigio.vmt.demo.application.controller.vehicle.create.request.VehicleRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
