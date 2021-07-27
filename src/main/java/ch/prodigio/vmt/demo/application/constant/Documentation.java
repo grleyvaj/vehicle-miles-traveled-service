@@ -32,7 +32,7 @@ public class Documentation {
 	public static final String vmt_tag_name = "Vehicle Miles Traveled Service";
 	public static final String vmt_tag_description = "CRUD of operations for manage Vehicle Miles Traveled";
 
-	public static final String import_vehicles_op_summary = "Import vehicles";
+	public static final String import_vehicles_op_summary = "Import vehicles from public dataset";
 	public static final String import_vehicles_op_description = "Import vehicles from dataset.";
 	public static final String import_vehicles_pm_description = "CSV Dataset to import.";
 	public static final String import_vehicles_rp_ok_description = "Vehicle has been imported";

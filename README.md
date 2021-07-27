@@ -22,7 +22,7 @@ Ruta de la documentación de swagger: `http://localhost:8081/vmt-demo-api-docs`
 
 2. Endpoints implementados:
 
-   POST `/vmt/v1/vehicles/import` Importar dataset para previamente cargar los datos. Retorna el listado de los datos importados (se lista solo una selección de datos). 
+   POST `/vmt/v1/vehicles/import` Importar dataset para previamente cargar los datos. Se deberá descargar previamente el dataset o emplear el que ha sido previamente descargado y se encuentra en el directorio de resorce : `\vehicle-miles-traveled-service\src\main\resources\04_sample_vmt_county.csv`. El endpoint retorna el listado de todos los kms de vehículos importados (de cada vmt se seleccionan algunos datos para listar). 
    ![printscrenn](readme/import-dataset.PNG)
    
    GET `/vmt/v1/vehicles` Listar todos los datos de todos los vehículos. Puede indicar paginación `/vmt/v1/vehicles?page=0&size=5&sort=id,asc`. 
@@ -37,7 +37,7 @@ Ruta de la documentación de swagger: `http://localhost:8081/vmt-demo-api-docs`
    PUT `/vmt/v1/vehicles/{vehicleId}` Actualizar vehículo. La implementación de este endpoint contiene el manejo de excepciones para las validaciones que se aplican al VehicleRequest, y para el manejo de la excepción cuando se especifica un vehículo para actualizar que no se encuentra registrado.
    ![printscrenn](readme/update.PNG)
    
-   DELETE `/vmt/v1/vehicles/{vehicleId}` Actualizar vehículo. La implementación de este endpoint contiene el manejo de excepciones para las validaciones que se aplican al VehicleRequest, y para el manejo de la excepción cuando se especifica un vehículo para actualizar que no se encuentra registrado.
+   DELETE `/vmt/v1/vehicles/{vehicleId}` Eliminar vehículo.
    ![printscrenn](readme/delete.PNG)
 
 3. Para un mejor entendimiento y además realizar pruebas, una vez que el proyecto se encuentra corriendo/levantado, se puede consultar la documentación, enlace: http://localhost:8081/vmt-demo-api-docs
@@ -58,8 +58,8 @@ Se implementaron pruebas automatizadas de unidad y de integración empleando `Ju
 ![printscrenn](readme/satisfactory-tests.PNG)
 
 # OTROS EJERCICIOS
-En mi perfil (https://github.com/grleyvaj) se pueden encontrar otros ejercicios que implementado con otras tecnologías como bases de datos en memoria como `redis`, no relacionales como `h2` y `mongodb`, relacional como `mysql`, donde también he empleado anotaciones para la inyección de dependencias (@Services, @Component, @Repository), he implementado validadores, convertidores, adaptadores, etc. 
-Por ejemplo puede consultar los ejercicios:
+En mi perfil (https://github.com/grleyvaj) se pueden encontrar otros ejercicios que he implementado con otras tecnologías como bases de datos en memoria como `redis`, no relacionales como `h2` y `mongodb`, relacional como `mysql`, donde también he empleado anotaciones para la inyección de dependencias (@Services, @Component, @Repository), he implementado validadores, convertidores, adaptadores, etc. 
+Puede consultar los ejercicios:
 
 - `APIsRest_Liga` (https://github.com/grleyvaj/APIsREST_Liga), 
 - `APIsREST_Tweets` (https://github.com/grleyvaj/APIsREST_Tweets), 
